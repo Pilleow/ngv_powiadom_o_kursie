@@ -1,35 +1,28 @@
-import functions_framework
-
+import os
 import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+from datetime import datetime
 from dotenv import dotenv_values
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
-import html_generator
+from html_generator.html_generator import HTMLGenerator
 
 
-@functions_framework.http
-def new_response(request):
-    try:
-        request_json = request.get_json(silent=True)
-    except:
-        request_json = request
-
-    email = request_json["form_response"]["answers"][3]["email"]
-    if email is None:
-        raise ValueError(f"Invalid email: {email}")
-    username = request_json["form_response"]["answers"][4]["text"]
-    upcoming_courses = request_json["form_response"]["answers"][0]["choices"]["labels"]
-    planned_courses = request_json["form_response"]["answers"][1]["choices"]["labels"]
-    wanted_courses = request_json["form_response"]["answers"][2]["choices"]["labels"]
-
-    html = html_generator.course_summary(username, upcoming_courses, planned_courses)
-
-    config = dotenv_values(".env")
-
-    send_email(config["EMAILADDRSENDER"], config["EMAILPWORD"], email, "Test", html)
-
-    return "Done."
+def new_response(email):
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    start = datetime.now()
+    html = HTMLGenerator.generate_html(
+        f"{script_dir}/html_generator/templates/time.html",
+        time=str(datetime.now())
+    )
+    config = dotenv_values(f"{script_dir}/.env")
+    send_email(
+        config["EMAILADDRSENDER"],
+        config["EMAILPWORD"],
+        email, "Test", html
+    )
+    end = datetime.now()
+    print(f"Sent email to {email} at {datetime.now()} - time taken: {end - start}")
 
 
 def get_element(key, request):
@@ -55,7 +48,5 @@ def send_email(sender_email, sender_password, recipient_email, subject, html_mes
 
     session.quit()
 
-# import json
-# with open("test.json", "r") as f:
-#     data = json.load(f)
-# new_response(data)
+
+new_response("pilleowo@gmail.com")

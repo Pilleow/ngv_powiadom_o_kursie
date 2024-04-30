@@ -1,4 +1,4 @@
-#import functions_framework
+import functions_framework
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -8,7 +8,7 @@ from dotenv import dotenv_values
 import html_generator
 
 
-#@functions_framework.http  # TODO usuń komentarze
+@functions_framework.http
 def new_response(request):
     try:
         request_json = request.get_json(silent=True)
@@ -55,8 +55,7 @@ def send_email(sender_email, sender_password, recipient_email, subject, html_mes
 
     session.quit()
 
-# todo usuń to poniżej
-import json
-with open("test.json", "r") as f:
-    data = json.load(f)
-new_response(data)
+# import json
+# with open("test.json", "r") as f:
+#     data = json.load(f)
+# new_response(data)

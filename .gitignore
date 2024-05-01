@@ -1,2 +1,5 @@
-/.env
-/gsheets/data/secret.json
+.env
+.secret.json
+/gsheets/data/gsheet_new.csv
+/gsheets/data/gsheet_old.csv
+/logger/log_*.log

@@ -7,8 +7,9 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 
 class GSheets:
-    def __init__(self, gsheet_id: str):
+    def __init__(self, gsheet_id: str, scriptlogger: object):
         self.gsheet_id = gsheet_id
+        self.scriptlogger = scriptlogger
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
         print(self.script_dir)
         self.client = self._authenticate_and_return_client()
@@ -16,7 +17,7 @@ class GSheets:
     def _authenticate_and_return_client(self) -> gspread.Client:
         scope = ['https://spreadsheets.google.com/feeds',
                  'https://www.googleapis.com/auth/drive']
-        keyfile = f'{self.script_dir}/data/secret.json'
+        keyfile = f'{self.script_dir}/data/.secret.json'
 
         creds = ServiceAccountCredentials.from_json_keyfile_name(keyfile, scope)
         return gspread.authorize(creds)

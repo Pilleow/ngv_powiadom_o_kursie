@@ -11,7 +11,6 @@ class GSheets:
         self.gsheet_id = gsheet_id
         self.scriptlogger = scriptlogger
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
-        print(self.script_dir)
         self.client = self._authenticate_and_return_client()
 
     def _authenticate_and_return_client(self) -> gspread.Client:

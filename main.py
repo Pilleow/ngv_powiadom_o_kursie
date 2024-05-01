@@ -1,4 +1,5 @@
 import os
+import pprint
 import smtplib
 from datetime import datetime
 from dotenv import dotenv_values
@@ -6,47 +7,42 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 from html_generator.html_generator import HTMLGenerator
+from gsheets.gsheets import GSheets
 
 
-def new_response(email):
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    start = datetime.now()
-    html = HTMLGenerator.generate_html(
-        f"{script_dir}/html_generator/templates/time.html",
-        time=str(datetime.now())
-    )
-    config = dotenv_values(f"{script_dir}/.env")
-    send_email(
-        config["EMAILADDRSENDER"],
-        config["EMAILPWORD"],
-        email, "Test", html
-    )
-    end = datetime.now()
-    print(f"Sent email to {email} at {datetime.now()} - time taken: {end - start}")
+class PowiadomOStarcieKursuScript:
+    def __init__(self):
+        self.script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.env_config = dotenv_values(f"{self.script_dir}/.env")
+        self.gsheets = GSheets(self.env_config["GSHEETID"])
 
+    def run(self) -> None:
+        """
+        Runs the script.
+        """
+        new_entries = self.gsheets.check_spreadsheet_for_new_entry()
+        pprint.pprint(new_entries)
 
-def get_element(key, request):
-    if request and key in request:
-        return request[key]
-    return None
+    def _send_email(self, recipient_email, subject, html_message) -> None:
+        """
+        Sends a MIMEMultipart email to the recipient.
+        :param recipient_email: Email address of the recipient.
+        :param subject: Subject of the email.
+        :param html_message: HTML message of the email.
+        """
 
+        message = MIMEMultipart()
+        message['From'] = config["EMAILADDRSENDER"]
+        message['To'] = recipient_email
+        message['Subject'] = subject
+        message.attach(MIMEText(html_message, 'html'))
 
-def send_email(sender_email, sender_password, recipient_email, subject, html_message):
-    message = MIMEMultipart()
-    message['From'] = sender_email
-    message['To'] = recipient_email
-    message['Subject'] = subject
+        session = smtplib.SMTP('smtp.gmail.com', 587)
+        session.starttls()
+        session.login(config["EMAILADDRSENDER"], config["EMAILPWORD"])
+        session.sendmail(config["EMAILADDRSENDER"], recipient_email, message.as_string())
+        session.quit()
 
-    message.attach(MIMEText(html_message, 'html'))
-
-    session = smtplib.SMTP('smtp.gmail.com', 587)
-    session.starttls()
-
-    session.login(sender_email, sender_password)
-
-    session.sendmail(sender_email, recipient_email, message.as_string())
-
-    session.quit()
-
-
-new_response("pilleowo@gmail.com")
+if __name__ == "__main__":
+    script = PowiadomOStarcieKursuScript()
+    script.run()

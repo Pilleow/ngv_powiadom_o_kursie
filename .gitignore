@@ -1,6 +1,6 @@
+/waitlist.json
 /gsheets/data/gsheet_new.csv
 /gsheets/data/gsheet_old.csv
 /gsheets/data/.secret.json
 /logger/log_*.log
 /.env
-/waitlists.json

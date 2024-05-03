@@ -94,6 +94,7 @@ class PowiadomOStarcieKursuScript:
         return courses_to_include_in_email
 
     def _check_if_course_page_contains_buy_link(self, course_id: int) -> bool:
+        return True # todo - USUNĄĆ!!!!!!!! ------------------------------------------------------------------------------------------------------------
         url = self.teachable.get_sales_page_url(course_id)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')

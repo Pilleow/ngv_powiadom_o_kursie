@@ -1,34 +1,7 @@
 
-body {
-    background-color: #fafafa;
-    font-family: 'Montserrat', sans-serif;
-    text-rendering: optimizeLegibility;
-    color: #212338;
-    font-size: max(16px,1rem) !important;
-}
-
-p {
-    font-size: max(16px,1rem) !important;
-}
-
-.signon {
-    font-size: max(19px,1.15rem) !important;
-}
-
-/* Example style for links */
-a {
-    color: #000; /* black */
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-div {
-    margin-top: 2em;
-    margin-bottom: 0.5em;
-    padding: 0.5em 2em;
+/* Active courses */
+#chirurgia {
+    color: #045d46;
 }
 
 .chirurgia {
@@ -36,9 +9,17 @@ div {
     color: white;
 }
 
+#hematologia {
+    color: #594f8f;
+}
+
 .hematologia {
     background-color: #594f8f;
     color: white;
+}
+
+#kardiologia {
+    color: #a00250;
 }
 
 .kardiologia {
@@ -46,14 +27,17 @@ div {
     color: white;
 }
 
+#nsn {
+    color: #88000c;
+}
+
 .nsn {
     background-color: #88000c;
     color: white;
 }
 
-.okulistyka {
-    background-color: white;
-    color: #212338;
+#pracakliniczna {
+    color: #5b7f8b;
 }
 
 .pracakliniczna {
@@ -61,9 +45,17 @@ div {
     color: white;
 }
 
+#rtgjb {
+    color: #507293;
+}
+
 .rtgjb {
     background-color: #507293;
     color: white;
+}
+
+#rtgkp {
+    color: #004070;
 }
 
 .rtgkp {
@@ -71,9 +63,17 @@ div {
     color: white;
 }
 
+#rtgkosci {
+    color: #004e91;
+}
+
 .rtgkosci {
     background-color: #004e91;
     color: white;
+}
+
+#rozrodkoni {
+    color: #292929;
 }
 
 .rozrodkoni {
@@ -81,9 +81,17 @@ div {
     color: white;
 }
 
+#egzotyki {
+    color: #207a6a;
+}
+
 .egzotyki {
     background-color: #207a6a;
     color: white;
+}
+
+#ecc1 {
+    color: #9d1615;
 }
 
 .ecc1 {
@@ -91,12 +99,28 @@ div {
     color: white;
 }
 
+#ecc2 {
+    color: #4c0208;
+}
+
 .ecc2 {
     background-color: #4c0208;
     color: white;
 }
 
+/* Upcoming courses */
+#usginter {
+}
+
 .usginter {
+    background-color: white;
+    color: #212338;
+}
+
+#okulistyka {
+}
+
+.okulistyka {
     background-color: white;
     color: #212338;
 }

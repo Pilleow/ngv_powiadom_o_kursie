@@ -48,17 +48,19 @@ class EmailHandler:
             for filename in course_snippets:
                 if course[0].startswith(filename[:-5]):
                     course_snippet = get_snippet(f"templates/course_snippets/{filename}")
-                    html_content += course_snippet
 
                     signon_snippet = get_snippet("templates/generic_snippets/signon.html")
                     signon_snippet = swap_with("IDKURSU", course[1]["id"], signon_snippet)
-                    html_content += signon_snippet
+                    course_snippet = swap_with("SIGNON", signon_snippet, course_snippet)
+
+                    html_content += course_snippet
                     break
 
         for course in courses_without_signon:
             for filename in course_snippets:
                 if course[0].startswith(filename[:-5]):
                     snippet = get_snippet(f"templates/course_snippets/{filename}")
+                    snippet = swap_with("SIGNON", "", snippet)
                     html_content += snippet
                     break
 

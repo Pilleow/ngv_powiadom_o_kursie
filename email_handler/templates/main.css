@@ -1,0 +1,102 @@
+
+body {
+    background-color: #fafafa;
+    font-family: 'Montserrat', sans-serif;
+    text-rendering: optimizeLegibility;
+    color: #212338;
+    font-size: max(16px,1rem) !important;
+}
+
+p {
+    font-size: max(16px,1rem) !important;
+}
+
+.signon {
+    font-size: max(19px,1.15rem) !important;
+}
+
+/* Example style for links */
+a {
+    color: #000; /* black */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+div {
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    padding: 0.5em 2em;
+}
+
+.chirurgia {
+    background-color: #045d46;
+    color: white;
+}
+
+.hematologia {
+    background-color: #594f8f;
+    color: white;
+}
+
+.kardiologia {
+    background-color: #a00250;
+    color: white;
+}
+
+.nsn {
+    background-color: #88000c;
+    color: white;
+}
+
+.okulistyka {
+    background-color: white;
+    color: #212338;
+}
+
+.pracakliniczna {
+    background-color: #5b7f8b;
+    color: white;
+}
+
+.rtgjb {
+    background-color: #507293;
+    color: white;
+}
+
+.rtgkp {
+    background-color: #004070;
+    color: white;
+}
+
+.rtgkosci {
+    background-color: #004e91;
+    color: white;
+}
+
+.rozrodkoni {
+    background-color: #292929;
+    color: white;
+}
+
+.egzotyki {
+    background-color: #207a6a;
+    color: white;
+}
+
+.ecc1 {
+    background-color: #9d1615;
+    color: white;
+}
+
+.ecc2 {
+    background-color: #4c0208;
+    color: white;
+}
+
+.usginter {
+    background-color: white;
+    color: #212338;
+}

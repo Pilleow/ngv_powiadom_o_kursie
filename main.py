@@ -1,45 +1,38 @@
-import os
 import json
-import pprint
-import re
-import smtplib
 import logging
-import requests
-from dotenv import dotenv_values
-from datetime import date, datetime
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import os
+import pprint
 
+import requests
 from bs4 import BeautifulSoup
+from dotenv import dotenv_values
+
+from email_handler.email_handler import EmailHandler
 from gsheets.gsheets import GSheets
 from logger.logger import ScriptLogger
+from mailerlite.mailerlite import MailerLite
 from teachable.teachable import Teachable
-from html_generator.html_generator import HTMLGenerator
 
 
 class PowiadomOStarcieKursuScript:
     def __init__(self):
-        self.months = {
-            "styczeń": 1,
-            "luty": 2,
-            "marzec": 3,
-            "kwiecień": 4,
-            "maj": 5,
-            "czerwiec": 6,
-            "lipiec": 7,
-            "sierpień": 8,
-            "wrzesień": 9,
-            "październik": 10,
-            "listopad": 11,
-            "grudzień": 12
-        }
-
         self.logger = ScriptLogger(level=logging.INFO)
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
         self.env_config = dotenv_values(f"{self.script_dir}/.env")
 
-        self.teachable = Teachable(self.env_config["TEACHABLEKEY"])
+        self.email_handler = EmailHandler(self.env_config["EMAILADDRSENDER"], self.env_config["EMAILPWORD"])
+        self.mailerlite = None
+        self.teachable = None
+        self.gsheets = None
+
+    def _init_gsheets(self):
         self.gsheets = GSheets(self.env_config["GSHEETID"], self.logger)
+
+    def _init_mailerlite(self):
+        self.mailerlite = MailerLite()
+
+    def _init_teachable(self):
+        self.teachable = Teachable(self.env_config["TEACHABLEKEY"])
 
     def run_for_new_entries(self) -> None:
         """
@@ -50,11 +43,13 @@ class PowiadomOStarcieKursuScript:
         2. If there are new entries, get info about courses from Teachable API
         3. For each entry:
             3.1. Check if chosen courses are published, add a suitable message to email HTML and possibly URLs?
-            3.2. Add the entry email and entry time to the Mailerlite waitlists of every UNPUBLISHED course that was chosen.
+            3.2. Add the entry email and entry time to the Mailerlite waitlists of every UNPUBLISHED
+                 course that was chosen.
             3.3. Send email.
         """
 
         # todo - uncomment and delete json entries
+        # self._init_gsheets()
         # new_entries = self.gsheets.check_spreadsheet_for_new_entry()
         new_entries = []
         with open("temp_entries.json", 'r') as f:
@@ -65,93 +60,47 @@ class PowiadomOStarcieKursuScript:
             return
         self.logger.log(f"{len(new_entries)} new entries detected.")
 
+        self._init_teachable()
         course_data = self.teachable.get_all_courses()
-        # with open("temp.json", "w") as f:
-        #     json.dump(course_data, f, indent=2)
 
+        self._init_mailerlite()
         for entry in new_entries:
-            courses_to_include_in_email = {
-                "with_sign_on": [],
-                "without_sign_on": []
-            }
-            for cname in entry["chosen_courses"]["active"]:
-                cname_start = cname.strip().split("(")[0]
-                cname_start = re.sub(r'[^a-zA-Z0-9]', '', cname_start).lower()
-                matching_courses = []
+            if len(entry["chosen_courses"]["upcoming"]) + len(entry["chosen_courses"]["active"]) == 0:
+                continue
+            courses_to_include_in_email = self.parse_entry(course_data, entry)
+            html_content = self.email_handler.compose_html_content(
+                courses_to_include_in_email["with_sign_on"],
+                courses_to_include_in_email["without_sign_on"],
+                entry
+            )
+            self.email_handler.send_email(entry["email"], "Powiadom mnie o starcie ~ NEWGRADVETS", html_content)
 
-                # 1. find all courses matching the name
-                for course in course_data["courses"]:
-                    c_name_clean = re.sub(r'[^a-zA-Z0-9]', '', course["name"]).lower()
-                    if c_name_clean.startswith(cname_start):
-                        matching_courses.append(course)
-
-                # 2. select the first upcoming course
-                upcoming_course = None
-                upcoming_course_date = date(year=2099, month=1, day=7)
-                today_date = date.today()
-                for m_course in matching_courses:
-                    name_split = m_course["name"].strip().split(" ")
-                    try:
-                        month = self.months[name_split[-2].lower()]
-                        year = int(name_split[-1])
-                    except (KeyError, ValueError):
-                        continue
-                    course_date = date(year=year, month=month, day=7)
-                    delta_current = upcoming_course_date - today_date
-                    delta_course = course_date - today_date
-                    if delta_course.days < 0:
-                        continue
-                    if delta_current.days > delta_course.days:
-                        upcoming_course = m_course
-                        upcoming_course_date = course_date
-
-                # 3. do stuff with upcoming course
-                print(f"\n\n dla: {cname}")
-                pprint.pprint(upcoming_course)
-                print(upcoming_course_date.strftime("%B %d, %Y"))
+    def parse_entry(self, course_data, entry):
+        courses_to_include_in_email = {"with_sign_on": [], "without_sign_on": []}
+        chosen_courses = entry["chosen_courses"]["active"] + entry["chosen_courses"]["upcoming"]
+        for full_cname in chosen_courses:
+            standardized_cname = full_cname.strip().split("(")[0]
+            standardized_cname = self.teachable.to_lower_alphanumeric(standardized_cname)
+            upcoming_course = self.teachable.get_upcoming_teachable_course(standardized_cname, course_data)
+            if upcoming_course is None:
+                courses_to_include_in_email["without_sign_on"].append([standardized_cname, full_cname])
+                continue
+            # the following line takes a lot of time, because it is literally scraping the sales page
+            # and looking for a purchase link. maybe it can somehow be optimized?
+            contains_buy_link = self._check_if_course_page_contains_buy_link(upcoming_course["id"])
+            if upcoming_course["is_published"] and contains_buy_link:
+                courses_to_include_in_email["with_sign_on"].append([standardized_cname, upcoming_course])
+                self.mailerlite.add_email_to_group()  # todo complete method call
+        return courses_to_include_in_email
 
     def _check_if_course_page_contains_buy_link(self, course_id: int) -> bool:
         url = self.teachable.get_sales_page_url(course_id)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
-        # with open("temp.html", 'w') as f:
-        #     f.write(soup.prettify())
         for button in soup.find_all('a', href=True):
             if button['href'].startswith("https://www.newgradvets.com/purchase?product_id="):
                 return True
         return False
-
-    def _send_email(self, recipient_email, subject, html_message) -> None:
-        """
-        Sends a MIMEMultipart email to the recipient.
-        :param recipient_email: Email address of the recipient.
-        :param subject: Subject of the email.
-        :param html_message: HTML message of the email.
-        """
-        message = MIMEMultipart()
-        message['From'] = config["EMAILADDRSENDER"]
-        message['To'] = recipient_email
-        message['Subject'] = subject
-        message.attach(MIMEText(html_message, 'html'))
-
-        session = smtplib.SMTP('smtp.gmail.com', 587)
-        session.starttls()
-        session.login(config["EMAILADDRSENDER"], config["EMAILPWORD"])
-        session.sendmail(config["EMAILADDRSENDER"], recipient_email, message.as_string())
-        session.quit()
-
-    # def run_for_waitlist(self) -> None:
-    #     """
-    #     Runs the script responsible for handling the waitlist and possible update notifications.
-    #
-    #     1. Get info about courses from Teachable API
-    #     2. If a course changed state from Unpublished to Published:
-    #         2.1  download recipient list of the course from Mailerlite API.
-    #         2.2. send update emails to all emails in waitlist, maybe send them in 90 Bcc recipient batches?
-    #              also, what if someone presses the "Published" button on accident?
-    #         2.3. Once all emails get sent, add all emails and entry times to a separate list such as "previous".
-    #     """
-    #     pass
 
 
 if __name__ == "__main__":

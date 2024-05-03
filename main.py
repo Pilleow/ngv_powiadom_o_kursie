@@ -48,12 +48,11 @@ class PowiadomOStarcieKursuScript:
             3.3. Send email.
         """
 
-        # todo - uncomment and delete json entries
-        # self._init_gsheets()
-        # new_entries = self.gsheets.check_spreadsheet_for_new_entry()
-        new_entries = []
-        with open("temp_entries.json", 'r') as f:
-            new_entries = json.load(f)
+        self._init_gsheets()
+        new_entries = self.gsheets.check_spreadsheet_for_new_entry()
+        # new_entries = []
+        # with open("temp_entries.json", 'r') as f:
+        #     new_entries = json.load(f)
 
         if len(new_entries) == 0:
             self.logger.log("No new entries detected in spreadsheet.", level=logging.DEBUG)
@@ -91,10 +90,11 @@ class PowiadomOStarcieKursuScript:
             if upcoming_course["is_published"] and contains_buy_link:
                 courses_to_include_in_email["with_sign_on"].append([standardized_cname, upcoming_course])
                 self.mailerlite.add_email_to_group()  # todo complete method call
+            else:
+                courses_to_include_in_email["without_sign_on"].append([standardized_cname, full_cname])
         return courses_to_include_in_email
 
     def _check_if_course_page_contains_buy_link(self, course_id: int) -> bool:
-        return True # todo - USUNĄĆ!!!!!!!! ------------------------------------------------------------------------------------------------------------
         url = self.teachable.get_sales_page_url(course_id)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')

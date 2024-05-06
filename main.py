@@ -27,7 +27,7 @@ class PowiadomOStarcieKursuScript:
         self.gsheets = None
 
         # todo - change below to False on commit
-        self.USE_DEV_MODE = False # if True, it will only send emails to the address below
+        self.USE_DEV_MODE = True # if True, it will only send emails to the address below
         self.DEV_MODE_EMAIL = "pilleowo@gmail.com"
 
     def _init_gsheets(self):

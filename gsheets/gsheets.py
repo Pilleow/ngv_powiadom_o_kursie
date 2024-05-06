@@ -1,3 +1,4 @@
+import json
 import os
 import csv
 import gspread
@@ -64,4 +65,13 @@ class GSheets:
         f_new.close()
         f_old.close()
 
-        return output
+        # local new entries backup in case program stops execution before completing processing
+        with open(f"{self.script_dir}/data/entries_processing.json", "r") as f:
+            entries_processing = json.load(f)
+        for entry in output:
+            if entry not in entries_processing:
+                entries_processing.append(entry)
+        with open(f"{self.script_dir}/data/entries_processing.json", 'w') as f:
+            json.dump(entries_processing, f)
+
+        return entries_processing

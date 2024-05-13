@@ -1,0 +1,110 @@
+{
+  "chirurgia": {
+    "title": "Chirurgia - Sekret Tkwi w Szczegółach",
+    "desc": "Podczas naszego pierwszego kursu z zakresu chirurgii weterynaryjnej planujemy zmienić Twoje spojrzenie na salę operacyjną i skalpel w Twojej dłoni. Wejdź w buty prowadzącego Cię specjalisty, rozwiązując zagadki kliniczne, i uzupełnij swoją wiedzę - w naszych kursach teoria jest tak mocno spleciona z praktyką, że nie ma mowy o wkuwaniu suchych formułek! Podczas tego intensywnego, 6-tygodniowego kursu, wprowadzimy Cię do świata chirurgii weterynaryjnej, a poprzez szczegółowe omówienie najważniejszych elementów pracy z pacjentem chirurgicznym - pomożemy Ci zdobyć więcej pewności siebie, nie tylko ze skalpelem lub igłą w dłoni.",
+    "color": "#045d46",
+    "use_special_snippet": ""
+  },
+  "hematologia": {
+    "title": "Hematologia w Gabinecie Internisty",
+    "desc": "Podczas tego intensywnego kursu zgłębisz tajniki analizy badań krwi, interpretacji wyników i diagnozowania różnorodnych schorzeń układu krwiotwórczego. Podczas odrabiania specjalnie opracowanych zadań domowych wcielisz się w rolę specjalisty hematologa i będziesz samodzielnie analizować wyniki oraz opisywać zmiany pod mikroskopem. Wszystko podane w przystępnej formie rozłożonej na tematyczne moduły ułatwiające przyswojenie sobie materiału.",
+    "color": "#594f8f",
+    "use_special_snippet": ""
+  },
+  "kardiologiaweterynaryjnaczęść1": {
+    "title": "Kardiologia Weterynaryjna Część 1",
+    "desc": "Podczas tego intensywnego, 6-tygodniowego kursu, odkryjesz zupełnie nowe możliwości pomagania pacjentom, a rozwiązując zagadki kliniczne - wejdziesz w buty doświadczonego kardiologa. Rozwijaj swoją wiedzę i umiejętności gdzie chcesz i kiedy chcesz: ten kurs dopasuje się do Ciebie!",
+    "color": "#a00250",
+    "use_special_snippet": ""
+  },
+  "neurologicznestanynagłe": {
+    "title": "Neurologiczne Stany Nagłe",
+    "desc": "Ten kompleksowy kurs skierowany jest zarówno do studentów ostatnich semestrów medycyny weterynaryjnej i świeżo upieczonych absolwentów, jak i praktykujących już lekarzy, chcących poznać kluczowe aspekty opieki nad pacjentem wykazującym objawy nagłych zaburzeń neurologicznych. Trójka prowadzących - doświadczonych lekarzy weterynarii zajmujących się na co dzień stanami nagłymi - przeprowadzi Cię przez proces opieki nad pacjentem, od jego pojawienia się w gabinecie, przez badania i diagnozę, po wdrożenie leczenia. Omówimy także sposoby skutecznej komunikacji z klientem, szczególnie ważnej i wyjątkowo trudnej w momencie, gdy na szali leży zdrowie i życie jego ukochanego pupila.",
+    "color": "#88000c",
+    "use_special_snippet": ""
+  },
+  "okulistyka": {
+    "title": "Okulistyka",
+    "desc": "",
+    "color": "#212338",
+    "use_special_snippet": ""
+  },
+  "radiologiajamybrzusznej": {
+    "title": "Radiologia Jamy Brzusznej",
+    "desc": "Podczas tego intensywnego, 7-tygodniowego kursu, nauczysz się, jak właściwie dobrać odpowiedni dla pacjenta rodzaj badania i jego parametry, wprawisz się w sztuce pozycjonowania i wyćwiczysz w interpretacji zdjęć RTG. Każdy narząd w jamie brzusznej zostanie dokładnie omówiony, a ponadto pokażemy ci mnóstwo prawdziwych zdjęć RTG najnowszej technologii, dzięki czemu rozpoznawanie jednostek chorobowych stanie się dla ciebie czymś zupełnie naturalnym. Podczas odrabiania specjalnie opracowanych zadań domowych, wcielisz się w rolę specjalisty radiologa i będziesz samodzielnie analizować zdjęcia RTG najczęstszych przypadków klinicznych. Wszystko podane w przystępnej formie, rozłożonej na tematyczne moduły, ułatwiające przyswojenie sobie materiału.",
+    "color": "#507293",
+    "use_special_snippet": ""
+  },
+  "radiologiaklatkipiersiowej": {
+    "title": "Radiologia Klatki Piersiowej",
+    "desc": "Podczas tego intensywnego 7-tygodniowego kursu nauczysz się jak właściwie dobrać odpowiedni dla pacjenta rodzaj badania i jego parametry, wprawisz się w sztuce pozycjonowania i wyćwiczysz w interpretacji zdjęć rentgenowskich klatki piersiowej. Każdy narząd w klatce piersiowej zostanie dokładnie omówiony, a ponadto pokażemy ci mnóstwo prawdziwych zdjęć rentgenowskich, dzięki czemu rozpoznawanie jednostek chorobowych stanie się dla ciebie czymś zupełnie naturalnym. Podczas odrabiania specjalnie opracowanych zadań domowych wcielisz się w rolę specjalisty radiologa i będziesz samodzielnie analizować zdjęcia rentgenowskie najczęstszych przypadków klinicznych. Wszystko podane w przystępnej formie rozłożonej na tematyczne moduły ułatwiające przyswojenie sobie materiału.",
+    "color": "#004070",
+    "use_special_snippet": ""
+  },
+  "radiologiaukładukostnego": {
+    "title": "Radiologia Układu Kostnego",
+    "desc": "Podczas tego intensywnego 7-tygodniowego kursu nauczysz się jak właściwie dobrać odpowiedni dla pacjenta rodzaj badania i jego parametry, wprawisz się w sztuce pozycjonowania i wyćwiczysz w interpretacji zdjęć rentgenowskich układu kostnego. Pokażemy ci mnóstwo prawdziwych zdjęć rentgenowskich, dzięki czemu rozpoznawanie jednostek chorobowych stanie się dla ciebie czymś zupełnie naturalnym.",
+    "color": "#004e91",
+    "use_special_snippet": ""
+  },
+  "rozródkoniklacze": {
+    "title": "Rozród Koni - Klacze",
+    "desc": "Podczas tego intensywnego, 5-tygodniowego kursu, wejdziesz w buty doświadczonego lekarza i opiekuna klaczy na każdym etapie rozrodu - od jej przygotowanie, przez ciążę, po opiekę po porodzie. Czekają na Ciebie szczegółowe omówienia każdego elementu w nagraniach wideo, uzupełnione materiałami dodatkowymi, zagadkami klinicznymi i odpowiedziami na Wasze anonimowe pytania w ramach sesji Q&A - wszystko, dla zdrowia Twoich pacjentek i ich źrebiąt.",
+    "color": "#292929",
+    "use_special_snippet": ""
+  },
+  "stanynagłeczęść1": {
+    "title": "Stany Nagłe Część 1",
+    "desc": "Kurs skierowany jest do lekarzy weterynarii, którzy chcą rozwinąć wiedzę i umiejętności niezbędne do reagowania w sytuacjach nagłych. Podczas tego 9-tygodniowego kursu poznasz kluczowe aspekty diagnozowania i leczenia pacjentów w stanach nagłych, jednocześnie rozwijając swoje umiejętności analityczne, zespołowe i komunikacyjne.",
+    "color": "#9d1615",
+    "use_special_snippet": ""
+  },
+  "stanynagłeczęść2": {
+    "title": "Stany Nagłe Część 2",
+    "desc": "Stany Nagłe Część 2 to kurs skierowany do lekarzy weterynarii, którzy chcą poszerzyć wiedzę i umiejętności niezbędne do reagowania w sytuacjach nagłych. To niezależny kurs - doskonale sprawdza się indywidualne, a także w duecie, jako kontynuacja Części 1. Decyzja należy do Ciebie!",
+    "color": "#4c0208",
+    "use_special_snippet": ""
+  },
+  "usginterwencyjne": {
+    "title": "USG Interwencyjne",
+    "desc": "",
+    "color": "#212338",
+    "use_special_snippet": ""
+  },
+  "zamieńteorięnapraktykę": {
+    "title": "Zamień Teorię na Praktykę",
+    "desc": "Kończysz studia i czujesz, że nie jesteś przygotowany do pracy? A może wracasz do zawodu po dłuższej przerwie? Przeraża Cię myśl o byciu samodzielnym lekarzem? Chcesz uporządkować swoją wiedzę? Umieć diagnozować i leczyć najczęściej spotykane przypadki? Nauczyć się jak rozmawiać z klientami o pieniądzach?",
+    "color": "#de621e",
+    "use_special_snippet": ""
+  },
+  "zwierzętaegzotyczne": {
+    "title": "Zwierzęta Egzotyczne w Codziennej Praktyce",
+    "desc": "Czy chcesz opanować niezbędną wiedzę potrzebną do leczenia zwierząt egzotycznych? Podczas tego intensywnego 9 -tygodniowego kursu nauczysz się jak przeprowadzać wywiad, wykonywać badania kliniczne różnych małych ssaków oraz gadów, a także ich leczenia. Zdobądź cenne umiejętności i wiedzę, która pomoże poczuć Ci się pewnie w leczeniu zwierząt egzotycznych.",
+    "color": "#207a6a",
+    "use_special_snippet": ""
+  },
+  "anestezjologiaweterynaryjna": {
+    "title": "Anestezjologia Weterynaryjna",
+    "desc": "",
+    "color": "#212338",
+    "use_special_snippet": ""
+  },
+  "rozródmałychzwierząt": {
+    "title": "Rozród Małych Zwierząt",
+    "desc": "",
+    "color": "#212338",
+    "use_special_snippet": ""
+  },
+  "stomatologiaweterynaryjna": {
+    "title": "Stomatologia Weterynaryjna",
+    "desc": "",
+    "color": "#212338",
+    "use_special_snippet": ""
+  },
+  "pracaklinicznalekarza": {
+    "title": "",
+    "desc": "",
+    "color": "",
+    "use_special_snippet": "templates/course_snippets/pracaklinicznalekarza.html"
+  }
+}

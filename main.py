@@ -1,7 +1,6 @@
 import json
 import logging
 import os
-import pprint
 
 import requests
 from bs4 import BeautifulSoup
@@ -27,7 +26,7 @@ class PowiadomOStarcieKursuScript:
         self.gsheets = None
 
         # todo - change below to False on commit
-        self.USE_DEV_MODE = False # if True, it will only send emails to the address below
+        self.USE_DEV_MODE = False  # if True, it will only send emails to the address below
         self.DEV_MODE_EMAIL = "pilleowo@gmail.com"
 
     def _init_gsheets(self):
@@ -75,6 +74,7 @@ class PowiadomOStarcieKursuScript:
         for entry in new_entries:
             try:
                 if self.USE_DEV_MODE and self.DEV_MODE_EMAIL != entry['email']:
+                    print(f"DEV MODE ACTIVE - Skipping entry {entry['email']}.")
                     self.logger.log("DEV MODE ACTIVE - Skipping entry.", level=logging.WARNING)
                     self.remove_entry_from_list(entry)
                     continue
@@ -123,7 +123,10 @@ class PowiadomOStarcieKursuScript:
 
         email = entry["email"]
         first_name = entry["username"].split(" ")[0]
-        last_name = entry["username"].split(" ")[1]
+        if len(entry["username"].split(" ")) > 1:
+            last_name = entry["username"].split(" ")[1]
+        else:
+            last_name = ""
         try:
             self.mailerlite.create_subscriber(email, first_name, last_name, add_to_groups=group_ids_to_add_to)
         except RuntimeError as e:

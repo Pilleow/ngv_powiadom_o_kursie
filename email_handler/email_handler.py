@@ -1,6 +1,7 @@
 import os
 import pprint
 import re
+import json
 import smtplib
 
 from email.mime.text import MIMEText
@@ -17,8 +18,14 @@ class EmailHandler:
         html_content = ""
         course_snippets = os.listdir(f"{self.script_dir}/templates/course_snippets/")
 
+        with open(f"{self.script_dir}/templates/course_snippets/snippets.json", "r") as f:
+            snippet_data = json.load(f)
+
         def swap_with(key: str, value: str, string: str) -> str:
             return re.sub("__" + key.upper() + "__", str(value), string)
+
+        def remove_description(string: str) -> str:
+            return re.sub("<div(.|\n)*<\/div>", "", string)
 
         def get_snippet(relative_path: str) -> str:
             with open(f"{self.script_dir}/{relative_path}", 'r') as f:
@@ -26,8 +33,6 @@ class EmailHandler:
             return out
 
         start_snippet = get_snippet("templates/generic_snippets/start.html")
-        css = get_snippet("templates/main.css")
-        start_snippet = swap_with("CSS", css, start_snippet)
         html_content += start_snippet
 
         if len(courses_with_signon) + len(courses_without_signon) == 1:
@@ -38,30 +43,49 @@ class EmailHandler:
                 course = courses_without_signon[0][1]
             snippet = swap_with("NAZWAKURSU", course["name"], snippet)
             snippet = swap_with("IMIENAZWISKO", entry["username"].split(" ")[0], snippet)
+
             html_content += snippet
         else:
             snippet = get_snippet("templates/generic_snippets/hello_multiple_courses.html")
             snippet = swap_with("IMIENAZWISKO", entry["username"].split(" ")[0], snippet)
             html_content += snippet
 
+        course_snippet = get_snippet("templates/course_snippets/course_snippet.html")
+
         for course in courses_with_signon:
-            for filename in course_snippets:
-                if course[0].startswith(filename[:-5]):
-                    course_snippet = get_snippet(f"templates/course_snippets/{filename}")
-
-                    signon_snippet = get_snippet("templates/generic_snippets/signon.html")
-                    signon_snippet = swap_with("IDKURSU", course[1]["id"], signon_snippet)
-                    course_snippet = swap_with("SIGNON", signon_snippet, course_snippet)
-
-                    html_content += course_snippet
+            for name in snippet_data.keys():
+                if course[0].startswith(name):
+                    if snippet_data[name]["use_special_snippet"] != "":
+                        c_sn = get_snippet(snippet_data[name]["use_special_snippet"])
+                    else:
+                        c_sn = course_snippet
+                        c_sn = swap_with("COLOR", snippet_data[name]["color"], c_sn)
+                        c_sn = swap_with("TITLE", snippet_data[name]["title"], c_sn)
+                        if (snippet_data[name]["desc"] == ""):
+                            c_sn = remove_description(c_sn)
+                        else:
+                            c_sn = swap_with("DESC", snippet_data[name]["desc"], c_sn)
+                        signon_snippet = get_snippet("templates/generic_snippets/signon.html")
+                        signon_snippet = swap_with("IDKURSU", course[1]["id"], signon_snippet)
+                        c_sn = swap_with("SIGNON", signon_snippet, c_sn)
+                    html_content += c_sn
                     break
 
         for course in courses_without_signon:
-            for filename in course_snippets:
-                if course[0].startswith(filename[:-5]):
-                    snippet = get_snippet(f"templates/course_snippets/{filename}")
-                    snippet = swap_with("SIGNON", "", snippet)
-                    html_content += snippet
+            for name in snippet_data.keys():
+                if course[0].startswith(name):
+                    if snippet_data[name]["use_special_snippet"] != "":
+                        c_sn = get_snippet(snippet_data[name]["use_special_snippet"])
+                    else:
+                        c_sn = course_snippet
+                        c_sn = swap_with("SIGNON", "", c_sn)
+                        c_sn = swap_with("COLOR", snippet_data[name]["color"], c_sn)
+                        c_sn = swap_with("TITLE", snippet_data[name]["title"], c_sn)
+                        if (snippet_data[name]["desc"] == ""):
+                            c_sn = remove_description(c_sn)
+                        else:
+                            c_sn = swap_with("DESC", snippet_data[name]["desc"], c_sn)
+                    html_content += c_sn
                     break
 
         html_content += get_snippet("templates/generic_snippets/end.html")

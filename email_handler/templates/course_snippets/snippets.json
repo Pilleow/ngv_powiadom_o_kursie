@@ -23,12 +23,6 @@
     "color": "#88000c",
     "use_special_snippet": ""
   },
-  "okulistyka": {
-    "title": "Okulistyka",
-    "desc": "",
-    "color": "#212338",
-    "use_special_snippet": ""
-  },
   "radiologiajamybrzusznej": {
     "title": "Radiologia Jamy Brzusznej",
     "desc": "Podczas tego intensywnego, 7-tygodniowego kursu, nauczysz się, jak właściwie dobrać odpowiedni dla pacjenta rodzaj badania i jego parametry, wprawisz się w sztuce pozycjonowania i wyćwiczysz w interpretacji zdjęć RTG. Każdy narząd w jamie brzusznej zostanie dokładnie omówiony, a ponadto pokażemy ci mnóstwo prawdziwych zdjęć RTG najnowszej technologii, dzięki czemu rozpoznawanie jednostek chorobowych stanie się dla ciebie czymś zupełnie naturalnym. Podczas odrabiania specjalnie opracowanych zadań domowych, wcielisz się w rolę specjalisty radiologa i będziesz samodzielnie analizować zdjęcia RTG najczęstszych przypadków klinicznych. Wszystko podane w przystępnej formie, rozłożonej na tematyczne moduły, ułatwiające przyswojenie sobie materiału.",
@@ -65,12 +59,6 @@
     "color": "#4c0208",
     "use_special_snippet": ""
   },
-  "usginterwencyjne": {
-    "title": "USG Interwencyjne",
-    "desc": "",
-    "color": "#212338",
-    "use_special_snippet": ""
-  },
   "zamieńteorięnapraktykę": {
     "title": "Zamień Teorię na Praktykę",
     "desc": "Kończysz studia i czujesz, że nie jesteś przygotowany do pracy? A może wracasz do zawodu po dłuższej przerwie? Przeraża Cię myśl o byciu samodzielnym lekarzem? Chcesz uporządkować swoją wiedzę? Umieć diagnozować i leczyć najczęściej spotykane przypadki? Nauczyć się jak rozmawiać z klientami o pieniądzach?",
@@ -83,9 +71,21 @@
     "color": "#207a6a",
     "use_special_snippet": ""
   },
+  "usginterwencyjne": {
+    "title": "USG Interwencyjne",
+    "desc": "Umiejętność wykonania wykonania podstawowego badania USG może, bardzo dosłownie, uratować życie niejednego pacjenta, jest więc wyjątkowo cennym elementem Twojego arsenału wiedzy. Ta świadomość skłoniła nas do opracowania, we współpracy z osobą specjalizującą się w uczeniu ultrasonografii, intensywnego kursu, podczas którego skupimy się na wykonywaniu badań AFAST, TFAST i FAST ECHO. Równocześnie omówimy najistotniejsze, rozpoznawalne na ekranie USG, przypadki stanów nagłych, z którymi możecie spotkać się w codziennej pracy. Będzie to bardzo wyjątkowy kurs w naszej ofercie, ponieważ do części analityczno-teoretycznej będzie mogła również dołączyć praktyka.",
+    "color": "#212338",
+    "use_special_snippet": ""
+  },
+  "okulistyka": {
+    "title": "Okulistyka",
+    "desc": "Podczas naszego kursu będziesz miał okazję zgłębić tajniki badania oczu u zwierząt, ucząc się różnorodnych technik i metod diagnozowania problemów związanych z narządem wzroku. Zdobędziesz wiedzę niezbędną do skutecznego radzenia sobie z różnorodnymi przypadkami, od prostych infekcji po bardziej złożone schorzenia. Celem kursu jest nie tylko dostarczenie Ci wiedzy teoretycznej, ale również praktycznych umiejętności, które pozwolą Ci skutecznie radzić sobie z najczęstszymi przypadkami okulistycznymi, z jakim możesz się spotkać w swojej praktyce weterynaryjnej.",
+    "color": "#212338",
+    "use_special_snippet": ""
+  },
   "anestezjologiaweterynaryjna": {
     "title": "Anestezjologia Weterynaryjna",
-    "desc": "",
+    "desc": "Sedacja oraz znieczulenie w medycynie weterynaryjnego, to niezbędny element niemal każdego badania diagnostycznego czy postępowania terapeutycznego, dlatego tak ważne jest, byś czuł się w tej kwestii pewnie. Kurs ten ma na celu zapewnienie Ci tego spokoju umysłu, poprzez przekazanie tajników wiedzy anestezjologicznej - jak w wypadku każdego z naszych kursów w sposób praktyczny i oparty na analizie prawdziwych przypadków klinicznych. Jeśli chcesz poczuć się pewnie formułując bezpieczny protokół anestezjologiczny, lecząc ból śródzabiegowy oraz nauczyć się, jak przewidywać, zapobiegać i leczyć komplikacje anestezjologiczne, to ten kurs jest właśnie dla Ciebie! ",
     "color": "#212338",
     "use_special_snippet": ""
   },

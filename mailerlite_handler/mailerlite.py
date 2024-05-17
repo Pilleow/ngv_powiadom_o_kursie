@@ -9,7 +9,7 @@ class MailerLite:
         })
 
     def create_subscriber(self, email: str, first_name: str, last_name: str, add_to_groups: list=[]):
-        out = self.client.subscribers.create(email, groups=add_to_groups, fields={
+        out = self.client.subscribers.create(email, groups=add_to_groups, status='active', fields={
             'name': first_name,
             'last_name': last_name,
         })

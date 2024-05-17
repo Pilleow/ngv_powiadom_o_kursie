@@ -5,6 +5,7 @@ import re
 
 
 from datetime import datetime, date
+from dateutil.relativedelta import relativedelta
 from teachable.teachable_authorizer import TeachableAuthorizer
 
 
@@ -68,7 +69,7 @@ class Teachable(TeachableAuthorizer):
         :return:
         """
         upcoming_course = None
-        upcoming_course_date = date(year=2099, month=1, day=7)
+        upcoming_course_date = date(year=2099, month=1, day=1)
 
         # 1. find all courses matching the name
         matching_courses = []
@@ -86,7 +87,7 @@ class Teachable(TeachableAuthorizer):
                 year = int(name_split[-1])
             except (KeyError, ValueError):
                 continue
-            course_date = date(year=year, month=month, day=7)
+            course_date = date(year=year, month=month, day=1) + relativedelta(months=1)
             delta_current = upcoming_course_date - today_date
             delta_course = course_date - today_date
             if delta_course.days < 0:

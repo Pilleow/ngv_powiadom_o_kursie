@@ -108,9 +108,10 @@ class PowiadomOStarcieKursuScript:
         for full_cname in chosen_courses:
             standardized_cname = full_cname.strip().split("(")[0]
             standardized_cname = self.teachable.to_lower_alphanumeric(standardized_cname)
-            upcoming_course = self.teachable.get_upcoming_teachable_course(standardized_cname, course_data)
-            # the following line takes a lot of time, because it is literally scraping the sales page
-            # and looking for a purchase link. maybe it can somehow be optimized?
+            if full_cname not in entry['chosen_courses']['active']:
+                upcoming_course = None
+            else:
+                upcoming_course = self.teachable.get_upcoming_teachable_course(standardized_cname, course_data)
             if upcoming_course is not None and upcoming_course["is_published"] \
                     and self._check_if_course_page_contains_buy_link(upcoming_course["id"]):
                 courses_to_include_in_email["with_sign_on"].append([standardized_cname, upcoming_course])
@@ -137,9 +138,11 @@ class PowiadomOStarcieKursuScript:
         url = self.teachable.get_sales_page_url(course_id)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
-        for button in soup.find_all('a', href=True):
-            if button['href'].startswith("https://www.newgradvets.com/purchase?product_id="):
+        a = soup.find('a', href=True)
+        while a is not None:
+            if a['href'].startswith("https://www.newgradvets.com/purchase?product_id="):
                 return True
+            a = a.find_next('a', href=True)
         return False
 
 

@@ -106,5 +106,11 @@
     "desc": "",
     "color": "",
     "use_special_snippet": "templates/course_snippets/pracaklinicznalekarza.html"
+  },
+  "rozródpsów": {
+    "title": "Rozród Psów",
+    "desc": "Świadomość istotności właściwej opieki na suczką przed, w trakcie i po ciąży, wzrasta - co raz częściej w gabinetach lekarskich pojawiają się nie tylko hodowcy, ale i właściciele, którym zależy na dobrze ich podopiecznej w tym szczególnym czasie. Jeśli chcesz ugruntować i poszerzyć wiedzę na temat endokrynologii cyklu rujowego i wykrywania owulacji, diagnostyki ciąży u psów, szczegółów przebiegu porodu oraz wykonywania bezpiecznego cesarskiego ciecia oraz zapewnić możliwie najlepszą opiekę noworodkom, to ten kurs jest właśnie dla Ciebie! Kurs ma na celu przekazanie Ci wiedzy, która pozwoli Ci sprostać oczekiwaniom właścicieli i hodowców oraz z pewnością siebie opiekować się ciężarną i jej szczeniętami.",
+    "color": "#212338",
+    "use_special_snippet": ""
   }
 }
